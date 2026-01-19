@@ -10,33 +10,30 @@ const nextConfig: NextConfig = {
         pathname: "/api/portraits/**",
       },
     ],
-    // Formats modernes pour réduire la taille
-    formats: ['image/webp'],
-    // Tailles d'images réduites pour économiser la RAM
+    // Formats modernes
+    formats: ['image/webp', 'image/avif'],
+    // Tailles réduites pour optimisation
     deviceSizes: [640, 750, 1080, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
-    // Cache court pour économiser l'espace
     minimumCacheTTL: 60,
-    // Désactiver l'optimisation pour économiser la RAM
+    // Désactiver l'optimisation serveur pour Vercel (économise du coût serveur)
     unoptimized: true,
   },
 
-  // Optimisation de la compilation
+  // Compression gzip
   compress: true,
+
+  // Masquer le header X-Powered-By
   poweredByHeader: false,
+
+  // React Strict Mode
   reactStrictMode: true,
 
-  // Réduire l'utilisation de la RAM pendant le build
-  experimental: {
-    // Désactiver le pre-rendering pour économiser la RAM
-    isrMemoryCacheSize: 0,
-  },
-
-  // Optimisation du build
-  swcMinify: true,
-
-  // Désactiver les source maps en développement pour économiser la RAM
+  // Désactiver les source maps en production
   productionBrowserSourceMaps: false,
+
+  // SWC Minify est activé par défaut dans Next.js 14+, on supprime la clé explicite
+  // isrMemoryCacheSize n'est plus nécessaire ou a changé de nom, on supprime experimental
 };
 
 export default nextConfig;
